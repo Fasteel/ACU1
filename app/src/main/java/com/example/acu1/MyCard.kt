@@ -1,31 +1,28 @@
 package com.example.acu1
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.rounded.Call
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.acu1.ui.bottomSheet.BottomSheetWithQrCode
 import com.example.acu1.ui.brand.BrandHeader
-import com.example.acu1.ui.button.ButtonWithIcon
+import com.example.acu1.ui.button.ButtonArea
+
+// use weight on column
 
 @Composable
 fun MyCard(viewModel: MyCardViewModel, contentPadding: PaddingValues) {
@@ -77,77 +74,8 @@ fun MyCard(viewModel: MyCardViewModel, contentPadding: PaddingValues) {
             )
         }
         Column(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.5f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = (-12).dp,
-                    alignment = Alignment.Bottom
-                ),
-            ) {
-                BrandHeader()
-            }
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(64.dp, 0.dp)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight(),
-                    verticalArrangement = Arrangement.spacedBy(
-                        alignment = Alignment.CenterVertically,
-                        space = 32.dp
-                    )
-                ) {
-                    ButtonWithIcon(
-                        text = "+33684324449",
-                        onClick = {
-                            viewModel.showAlert()
-                        },
-                        customIcon = {
-                            Icon(
-                                Icons.Rounded.Call,
-                                contentDescription = "Phone icon",
-                                tint = Color(0xFF323936),
-                            )
-                        }
-                    )
-                    ButtonWithIcon(
-                        text = "Fasteel",
-                        onClick = {
-                            viewModel.showBottomSheet(QrType.GITHUB)
-                        },
-                        customIcon = {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_github),
-                                contentDescription = "Github icon",
-                                modifier = Modifier
-                                    .size(30.dp)
-                                    .padding(0.dp, 0.dp, 6.dp, 0.dp)
-                            )
-                        }
-                    )
-                    ButtonWithIcon(
-                        text = "Carl MONNERA",
-                        onClick = {
-                            viewModel.showBottomSheet(QrType.LINKEDIN)
-                        },
-                        customIcon = {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_linkedin),
-                                contentDescription = "Linkedin icon",
-                                modifier = Modifier
-                                    .size(30.dp)
-                                    .padding(0.dp, 0.dp, 6.dp, 0.dp)
-                            )
-                        }
-                    )
-                }
-            }
+            BrandHeader()
+            ButtonArea(viewModel)
         }
     }
 
