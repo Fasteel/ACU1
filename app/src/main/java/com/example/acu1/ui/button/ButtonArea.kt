@@ -3,8 +3,9 @@ package com.example.acu1.ui.button
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -21,11 +22,12 @@ import com.example.acu1.QrType
 import com.example.acu1.R
 
 @Composable
-fun ButtonArea(viewModel: MyCardViewModel) {
+fun ColumnScope.ButtonArea(viewModel: MyCardViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxSize()
+            .weight(1f)
+            .fillMaxWidth()
             .padding(64.dp, 0.dp)
     ) {
         Column(

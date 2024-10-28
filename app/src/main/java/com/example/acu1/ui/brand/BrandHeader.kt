@@ -3,7 +3,7 @@ package com.example.acu1.ui.brand
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,18 +21,16 @@ import androidx.compose.ui.unit.sp
 import com.example.acu1.R
 
 @Composable
-fun BrandHeader() {
+fun ColumnScope.BrandHeader() {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.5f),
+            .weight(1f),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
             space = (-12).dp,
             alignment = Alignment.Bottom
         ),
     ) {
-
         Image(
             painter = painterResource(id = R.drawable.ic_icon_fasteel),
             contentDescription = "Fasteel icon",
