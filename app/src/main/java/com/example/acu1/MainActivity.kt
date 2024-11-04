@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             viewModel.startActivityEvent.collectLatest {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.setData(Uri.parse("smsto:"));
+                intent.setData(Uri.parse("smsto:"))
                 intent.putExtra("sms_body", getMessageText(it))
                 startActivity(this@MainActivity, intent, null)
             }

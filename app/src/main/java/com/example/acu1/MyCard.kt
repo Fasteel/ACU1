@@ -22,8 +22,6 @@ import com.example.acu1.ui.bottomSheet.BottomSheetWithQrCode
 import com.example.acu1.ui.brand.BrandHeader
 import com.example.acu1.ui.button.ButtonArea
 
-// use weight on column
-
 @Composable
 fun MyCard(viewModel: MyCardViewModel, contentPadding: PaddingValues) {
     Surface(
