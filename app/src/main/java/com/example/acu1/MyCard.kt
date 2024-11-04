@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.acu1.ui.bottomSheet.BottomSheetWithQrCode
 import com.example.acu1.ui.brand.BrandHeader
@@ -36,13 +37,13 @@ fun MyCard(viewModel: MyCardViewModel, contentPadding: PaddingValues) {
                 icon = {
                     Icon(
                         Icons.Default.LocationOn,
-                        contentDescription = "Location icon",
+                        contentDescription = stringResource(R.string.icon_description_location),
                         tint = Color(0xFF323936)
                     )
                 },
                 title = {
                     Text(
-                        text = "Select the message language",
+                        text = stringResource(R.string.select_lang),
                         color = Color(0xFF323936)
                     )
                 },
@@ -56,7 +57,7 @@ fun MyCard(viewModel: MyCardViewModel, contentPadding: PaddingValues) {
                             viewModel.hideAlert()
                         }
                     ) {
-                        Text("English", color = Color(0xFF323936))
+                        Text(stringResource(R.string.lang_en), color = Color(0xFF323936))
                     }
                 },
                 dismissButton = {
@@ -66,7 +67,7 @@ fun MyCard(viewModel: MyCardViewModel, contentPadding: PaddingValues) {
                             viewModel.hideAlert()
                         }
                     ) {
-                        Text("French", color = Color(0xFF323936))
+                        Text(stringResource(R.string.lang_fr), color = Color(0xFF323936))
                     }
                 }
             )
@@ -86,13 +87,13 @@ fun MyCard(viewModel: MyCardViewModel, contentPadding: PaddingValues) {
             if (viewModel.bottomSheetType.value == QrType.GITHUB) {
                 Image(
                     painter = painterResource(id = R.drawable.qr_github),
-                    contentDescription = "Github QR Code", // TODO use resource
+                    contentDescription = stringResource(R.string.qr_description_github),
                     modifier = Modifier.size(250.dp)
                 )
             } else if (viewModel.bottomSheetType.value === QrType.LINKEDIN) {
                 Image(
                     painter = painterResource(id = R.drawable.qr_linkedin),
-                    contentDescription = "Linkedin QR Code", // TODO use resource
+                    contentDescription = stringResource(R.string.qr_description_linkedin),
                     modifier = Modifier.size(250.dp)
                 )
             }
