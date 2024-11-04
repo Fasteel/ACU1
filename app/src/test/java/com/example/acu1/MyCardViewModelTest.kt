@@ -1,5 +1,16 @@
+@file:Suppress("IllegalIdentifier")
+
 package com.example.acu1
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -10,9 +21,19 @@ import org.junit.jupiter.api.Test
 class MyCardViewModelTest {
     private lateinit var viewModel: MyCardViewModel
 
+    private val testDispatcher = StandardTestDispatcher()
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     @BeforeEach
     fun setUp() {
+        Dispatchers.setMain(testDispatcher)
         viewModel = MyCardViewModel()
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @AfterEach
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
@@ -67,9 +88,22 @@ class MyCardViewModelTest {
     }
 
     @Test
-    fun `GIVEN none bottomSheet WHEN hideBottomSheet called THEN it should throw an exception`() {
+    fun `GIVEN none bottomSheet WHEN hideBottomSheet is called THEN it should throw an exception`() {
         assertThrows(AssertionError::class.java) {
             viewModel.hideBottomSheet()
         }
     }
+
+    @Test
+    fun `GIVEN the EN language WHEN triggerStartActivity is called THEN it should emit the EN value`() =
+        runTest {
+            val testLang = Lang.EN
+            val job = launch {
+                val emittedLang = viewModel.startActivityEvent.first()
+                assertEquals(testLang, emittedLang)
+            }
+            viewModel.triggerStartActivity(testLang)
+            job.join()
+            assertTrue(job.isCompleted)
+        }
 }
