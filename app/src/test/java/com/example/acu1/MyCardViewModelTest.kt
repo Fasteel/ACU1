@@ -1,67 +1,75 @@
 package com.example.acu1
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-@Suppress("FunctionName")
 class MyCardViewModelTest {
     private lateinit var viewModel: MyCardViewModel
 
-    @Before
+    @BeforeEach
     fun setUp() {
         viewModel = MyCardViewModel()
     }
 
     @Test
-    fun givenInitialViewModel_whenShowAlertIsCalled_thenAlertLangIsVisibleShouldChangeFromFalseToTrue() {
+    fun `GIVEN initial view model WHEN show alert is called THEN alert lang is visible should change from False to True`() {
         assertFalse(viewModel.alertLangIsVisible.value)
         viewModel.showAlert()
         assertTrue(viewModel.alertLangIsVisible.value)
     }
 
-    @Test(expected = AssertionError::class)
-    fun givenAnAlert_whenShowAlertIsCalled_thenItShouldThrowAnAssertionError() {
+    @Test
+    fun `GIVEN an alert WHEN showAlert is called THEN it should throw an assertion error`() {
         viewModel.showAlert()
-        viewModel.showAlert()
+        assertThrows(AssertionError::class.java) {
+            viewModel.showAlert()
+        }
     }
 
     @Test
-    fun givenAlertVisible_whenHideAlertIsCalled_thenAlertLangShouldBeFalse() {
+    fun `GIVEN alert visible WHEN hideAlert is called THEN alertLang should be False`() {
         viewModel.showAlert()
         assertTrue(viewModel.alertLangIsVisible.value)
         viewModel.hideAlert()
         assertFalse(viewModel.alertLangIsVisible.value)
     }
 
-    @Test(expected = AssertionError::class)
-    fun givenInitialViewModel_whenHideAlertIsCalled_thenItShouldThrowAnAssertionError() {
-        viewModel.hideAlert()
+    @Test
+    fun `GIVEN initial view model WHEN hideAlert is called THEN it should throw an assertion error`() {
+        assertThrows(AssertionError::class.java) {
+            viewModel.hideAlert()
+        }
     }
 
     @Test
-    fun givenInitialViewModel_whenShowBottomSheetCalledWithLinkedin_thenBottomSheetTypeShouldChangeFromNoneToLinkedin() {
+    fun `GIVEN initial view model WHEN showBottomSheet called with Linkedin THEN bottomSheetType should change from none to Linkedin`() {
         assertEquals(QrType.NONE, viewModel.bottomSheetType.value)
         viewModel.showBottomSheet(QrType.LINKEDIN)
         assertEquals(QrType.LINKEDIN, viewModel.bottomSheetType.value)
     }
 
     @Test
-    fun givenABottomSheet_whenHideBottomSheetCalled_thenBottomSheetTypeShouldChangeToNone() {
+    fun `GIVEN a BottomSheet WHEN hideBottomSheet called THEN bottomSheetType should change to none`() {
         viewModel.showBottomSheet(QrType.LINKEDIN)
         viewModel.hideBottomSheet()
         assertEquals(QrType.NONE, viewModel.bottomSheetType.value)
     }
 
-    @Test(expected = AssertionError::class)
-    fun givenNoneBottomSheet_whenShowBottomSheetCalled_thenItShouldThrowAnException() {
-        viewModel.showBottomSheet(QrType.NONE)
+    @Test
+    fun `GIVEN none bottomSheet WHEN showBottomSheetCalled THEN it should throw an exception`() {
+        assertThrows(AssertionError::class.java) {
+            viewModel.showBottomSheet(QrType.NONE)
+        }
     }
 
-    @Test(expected = AssertionError::class)
-    fun givenNoneBottomSheet_whenHideBottomSheetCalled_thenItShouldThrowAnException() {
-        viewModel.hideBottomSheet()
+    @Test
+    fun `GIVEN none bottomSheet WHEN hideBottomSheet called THEN it should throw an exception`() {
+        assertThrows(AssertionError::class.java) {
+            viewModel.hideBottomSheet()
+        }
     }
 }
